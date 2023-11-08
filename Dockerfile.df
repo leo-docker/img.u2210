@@ -1,0 +1,18 @@
+FROM arm64v8/ubuntu:22.10
+
+# 預安裝
+RUN apt update
+RUN apt install -y --no-install-recommends vim git zsh wget net-tools openssh-server
+# 配置 zsh
+ADD zshrc /root/.zshrc
+ADD omz.tar /root/
+# 配置SSH Service
+ADD sshd_config /etc/ssh/
+# ---
+
+# 客製化寫這邊
+
+# ---
+WORKDIR /opt
+# 啟動指令
+CMD ["/bin/zsh"]
